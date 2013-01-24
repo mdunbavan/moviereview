@@ -1,0 +1,58 @@
+<%= form_for(@review) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+<!--
+	<fieldset>
+		<legend>Rating</legend>
+		<% @ratings.each do |label, value| %>
+		<% if :rating == value %>
+		<%= f.radio_button :rating, label, :checked %>
+		<% else %>
+		<%= f.radio_button :rating, label %>
+		<% end %>
+		<label for="<%= 'movie_rating_' + value %>">
+		<%= label %>
+		</label>
+		<br/>
+		<% end %>
+	</fieldset>
+-->
+  <%= radio_buttons("review", @ratings, :rating, "Rating") %>
+  <div class="field">
+    <%= f.label :synopsis %><br />
+    <%= f.text_area :synopsis %>
+  </div>
+  <div class="field">
+    <%= f.label :release %><br />
+    <%= f.date_select :release %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.check_box :status %>
+  </div>
+  <div class="field">
+    <%= f.label :score %><br />
+    <%= f.number_field :score %>
+  </div>
+  <div class="field">
+    <%= f.label :cost %><br />
+    <%= f.text_field :cost %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
